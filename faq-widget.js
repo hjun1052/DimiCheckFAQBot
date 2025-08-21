@@ -39,6 +39,11 @@
     .faq-widget-trigger:hover {
         transform: scale(1.1);
     }
+    
+    .chatbotimg {
+        width:35px;
+        height: 35px;
+    }
 
     .faq-widget-popup {
         position: fixed;
@@ -202,7 +207,7 @@
             </form>
         </footer>
     </div>
-    <button class="faq-widget-trigger" id="faq-trigger">?</button>
+    <button class="faq-widget-trigger" id="faq-trigger"><img class="chatbotimg" src="src/chatbot.png"></button>
   `;
 
   // 3. 챗봇 로직을 정의합니다.
@@ -224,8 +229,8 @@
       },
       {
         id: 'status',
-        keywords: ['상태', '자리', '자리비움', '자리비웠다', '화장실', '동아리', '외출', '상태변경', '자리 상태'],
-        response: '학생들은 DimiCheck에서 자신의 상태(예: 화장실, 동아리, 외출)를 직접 변경할 수 있고, 교사는 이를 실시간으로 확인할 수 있습니다. 모바일에서는 사이트 접속 후 원하는 상태를 선택하여 완료 버튼을 누르면 되며, 전자칠판에서는 본인 번호의 자석을 끌어다 해당하는 영역에 놓으면 됩니다.'
+        keywords: ['상태', '자리', '자리비움', '자리비웠다', '화장실', '동아리', '외출', '방과후', '프로젝트', '물', '조기입실', '복도', '상태변경', '자리 상태'],
+        response: '학생들은 DimiCheck에서 자신의 상태(예: 화장실, 동아리, 외출)를 직접 변경할 수 있고, 교사는 이를 실시간으로 확인할 수 있습니다. 모바일에서는 사이트 접속 후 원하는 상태를 선택하여 완료 버튼을 누르면 되며, 전자칠판에서는 본인 번호의 자석을 끌어다 해당하는 영역에 놓으면 됩니다. 알맞은 영역이 없다면, 기타 영역에 넣은 뒤 사유를 적으면 됩니다. 다시 자리에 돌아왔다면 전자칠판에서 본인 번호의 자석을 원래 위치에 두거나, 사이트에서 현재 선택되어 있는 카드를 클릭하여 선택을 취소하면 됩니다.'
       },
       {
         id: 'login',
@@ -259,7 +264,7 @@
       },
       {
         id: 'help',
-        keywords: ['뭐해', '뭐 할 수 있어', '뭘', '할 줄 아는거', '도움말', '기능', '사용법', '뭘 해', '넌 뭐야'],
+        keywords: ['뭐해', '뭐 할 수 있어', '뭘', '할 줄 아는거', '도움말', '사용법', '뭘 해', '넌 뭐야'],
         response: `저는 DimiCheck 챗봇이에요 🤖. 제가 도와드릴 수 있는 건:\n      출결 인증 방법 안내, \n      상태 변경(화장실, 동아리 등) 설명, \n      로그인/비밀번호 문제 안내, \n      교사용, 학생용 페이지 차이 안내, \n      오류/문제 발생 시 대처법 안내, \n      개발팀 문의 방법 안내 와 같아요. \n\n      궁금한 키워드를 입력하면 바로 알려드려요!`
       },
       {
@@ -285,6 +290,16 @@
     const widgetContainer = document.createElement("div");
     widgetContainer.className = 'dimi-faq-widget-container';
     widgetContainer.innerHTML = widgetHTML;
+    // document.body.appendChild(widgetContainer);
+
+    // ✅ 컨테이너를 흐름에서 제거해서 레이아웃 영향 0
+    widgetContainer.style.position = 'fixed';
+    widgetContainer.style.top = '0';
+    widgetContainer.style.left = '0';
+    widgetContainer.style.width = '0';
+    widgetContainer.style.height = '0';
+    widgetContainer.style.zIndex = '9997';
+
     document.body.appendChild(widgetContainer);
 
     // 위젯 요소 및 이벤트 리스너 설정
@@ -354,7 +369,7 @@
       } else {
         return {
           response: "죄송해요, 잘 이해하지 못했어요. 아래의 키워드로 다시 질문해주시겠어요?",
-          suggestions: ['도움말', '출결 인증', '로그인 방법', '상태 변경', '선생님 기능']
+          suggestions: ['도움말', '출결 인증', '로그인 방법', '상태 변경', '선생님']
         };
       }
     }
