@@ -47,7 +47,7 @@
 
   .chatbotimg {
       width:35px;
-  }
+}
   .faq-widget-trigger .chatbot-icon,
   .faq-widget-trigger .close-icon {
       position: absolute;
