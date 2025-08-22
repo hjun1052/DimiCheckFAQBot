@@ -238,7 +238,7 @@
         </footer>
     </div>
     <button class="faq-widget-trigger" id="faq-trigger">         
-      <img class="chatbot-icon" src="src/chatbot.png" alt="Chatbot open button">
+      <img class="chatbot-icon" src="https://hjun1052.github.io/DimiCheckFAQBot/src/chatbot.png" alt="Chatbot open button">
       <span class="close-icon">&times;</span> 
     </button>   
 `;
