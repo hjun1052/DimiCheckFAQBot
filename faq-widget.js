@@ -16,7 +16,7 @@
     }
     @media (prefers-color-scheme: light) {
       :root {
-        --widget-bg: #ffffff;
+        --widget-bg: #f5f6fa;
         --widget-card: rgba(0, 0, 0, .05);
         --widget-text: #1e1e1e;
         --widget-muted: #5a5a5a;
@@ -24,11 +24,12 @@
         --widget-primary-2: #ff6ad0;
         --widget-shadow: 0 10px 30px rgba(0, 0, 0, .15);
         --widget-border: rgba(0,0,0, .1);
-        --widget-bot-bubble: rgba(0,0,0, .05);
-        --widget-input-bg: rgba(0,0,0, .05);
+        --widget-bot-bubble: #f1f3f6;
+        --widget-input-bg: #ffffff;
         --widget-card-2: rgba(0, 0, 0, .03);
       }
     }
+
 
     .dimi-faq-widget-container * {
         box-sizing: border-box;
