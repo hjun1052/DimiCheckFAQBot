@@ -482,7 +482,6 @@
           trigger.style.display = 'flex';
         }
         localStorage.setItem('hideChat', hide);
-      });
     });
 
     trigger.addEventListener('click', () => {
