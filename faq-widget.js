@@ -9,6 +9,25 @@
       --widget-primary: #d04fff;
       --widget-primary-2: #ff6ad0;
       --widget-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+      --widget-border: rgba(255,255,255, .15);
+      --widget-bot-bubble: rgba(0,0,0, .2);
+      --widget-input-bg: rgba(0,0,0, .2);
+      --widget-card-2: rgba(255, 255, 255, .06);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --widget-bg: #ffffff;
+        --widget-card: rgba(0, 0, 0, .05);
+        --widget-text: #1e1e1e;
+        --widget-muted: #5a5a5a;
+        --widget-primary: #d04fff;
+        --widget-primary-2: #ff6ad0;
+        --widget-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+        --widget-border: rgba(0,0,0, .1);
+        --widget-bot-bubble: rgba(0,0,0, .05);
+        --widget-input-bg: rgba(0,0,0, .05);
+        --widget-card-2: rgba(0, 0, 0, .03);
+      }
     }
 
     .dimi-faq-widget-container * {
@@ -74,25 +93,84 @@
       transform: rotate(0deg) scale(1);
   }
 
-  .faq-hide-toggle {
-      position: fixed;
-      bottom: 90px;
-      right: 25px;
-      z-index: 9998;
-      background: var(--widget-card);
-      color: var(--widget-text);
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+  .chat-header {
+      position: relative;
   }
-  .faq-hide-toggle label {
-      cursor: pointer;
+  .chat-header .header-actions {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 8px;
+      position: relative;
+  }
+  .chat-header .menu-button {
+      background: transparent;
+      border: none;
+      color: var(--widget-text);
+      font-size: 18px;
+      cursor: pointer;
+  }
+  .chat-header .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--widget-card);
+      border: 1px solid var(--widget-border);
+      border-radius: 8px;
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 10000;
+  }
+  .chat-header .dropdown-menu.open {
+      display: flex;
+  }
+  .dropdown-menu .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      color: var(--widget-text);
+      font-size: 14px;
+  }
+  .switch {
+      position: relative;
+      display: inline-block;
+      width: 32px;
+      height: 18px;
+  }
+  .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+  }
+  .switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--widget-muted);
+      transition: .2s;
+      border-radius: 34px;
+  }
+  .switch .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 2px;
+      bottom: 2px;
+      background-color: #fff;
+      transition: .2s;
+      border-radius: 50%;
+  }
+  .switch input:checked + .slider {
+      background: var(--widget-primary);
+  }
+  .switch input:checked + .slider:before {
+      transform: translateX(14px);
   }
 
 
@@ -108,9 +186,9 @@
         box-shadow: var(--widget-shadow);
         display: none;
         flex-direction: column;
-        background: linear-gradient(180deg, var(--widget-card), rgba(255, 255, 255, .06));
+        background: linear-gradient(180deg, var(--widget-card), var(--widget-card-2));
         backdrop-filter: saturate(140%) blur(14px);
-        border: 1px solid rgba(255,255,255, .15);
+        border: 1px solid var(--widget-border);
         transform-origin: bottom right;
         animation: widget-rise .3s ease-out;
     }
@@ -128,7 +206,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 16px;
-      border-bottom: 1px solid rgba(255,255,255, .1);
+      border-bottom: 1px solid var(--widget-border);
       flex-shrink: 0;
     }
     .faq-widget-popup .chat-header h1 {
@@ -141,7 +219,7 @@
         font-size: 12px;
         background: transparent;
         color: var(--widget-text);
-        border: 1px solid rgba(255,255,255, .2);
+        border: 1px solid var(--widget-border);
         text-decoration: none;
         border-radius: 8px;
         font-weight: 500;
@@ -184,13 +262,13 @@
       border-radius: 16px 16px 4px 16px;
     }
     .faq-widget-popup .message.bot .bubble {
-      background: rgba(0,0,0, .2);
+      background: var(--widget-bot-bubble);
       border-radius: 16px 16px 16px 4px;
     }
 
     .faq-widget-popup .chat-input-area {
       padding: 12px;
-      border-top: 1px solid rgba(255,255,255, .1);
+      border-top: 1px solid var(--widget-border);
       flex-shrink: 0;
     }
     .faq-widget-popup #chat-form {
@@ -205,7 +283,7 @@
       outline: none;
       color: var(--widget-text);
       font-size: 14px;
-      background: rgba(0,0,0,0.2);
+      background: var(--widget-input-bg);
       border: 1px solid transparent;
       transition: border-color .2s;
     }
@@ -244,7 +322,19 @@
     <div class="faq-widget-popup" id="faq-popup">
         <header class="chat-header">
             <h1>DimiCheck FAQ</h1>
-            <a href="https://github.com/orgs/DimiCheck/discussions/categories/q-a" target="_blank" rel="noopener noreferrer">문의하기</a>
+            <div class="header-actions">
+              <a href="https://github.com/orgs/DimiCheck/discussions/categories/q-a" target="_blank" rel="noopener noreferrer">문의하기</a>
+              <button id="faq-menu-button" class="menu-button">⋮</button>
+              <div id="faq-menu" class="dropdown-menu">
+                <div class="menu-item">
+                  <span>챗봇 버튼 숨기기</span>
+                  <label class="switch">
+                    <input type="checkbox" id="hide-chat-button">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
         </header>
         <div id="chat-messages" class="chat-messages">
             <div class="message bot">
@@ -257,9 +347,6 @@
    <button type="submit" class="submit-btn">전송</button>
             </form>
         </footer>
-    </div>
-    <div class="faq-hide-toggle">
-      <label><input type="checkbox" id="hide-chat-button"> 챗봇 버튼 숨기기</label>
     </div>
     <button class="faq-widget-trigger" id="faq-trigger">
       <img class="chatbot-icon" src="https://hjun1052.github.io/DimiCheckFAQBot/src/chatbot.png" alt="Chatbot open button">
@@ -364,12 +451,24 @@
     const chatMessages = document.getElementById('chat-messages');
     const chatForm = document.getElementById('chat-form');
     const userInput = document.getElementById('user-input');
+    const menuButton = document.getElementById('faq-menu-button');
+    const menu = document.getElementById('faq-menu');
     const hideToggle = document.getElementById('hide-chat-button');
 
     if (localStorage.getItem('hideChat') === 'true') {
       trigger.style.display = 'none';
       hideToggle.checked = true;
     }
+
+    menuButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && e.target !== menuButton) {
+        menu.classList.remove('open');
+      }
+    });
 
     hideToggle.addEventListener('change', () => {
       const hide = hideToggle.checked;
