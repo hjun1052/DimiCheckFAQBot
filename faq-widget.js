@@ -74,6 +74,27 @@
       transform: rotate(0deg) scale(1);
   }
 
+  .faq-hide-toggle {
+      position: fixed;
+      bottom: 90px;
+      right: 25px;
+      z-index: 9998;
+      background: var(--widget-card);
+      color: var(--widget-text);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+  }
+  .faq-hide-toggle label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+  }
+
 
     .faq-widget-popup {
         position: fixed;
@@ -237,10 +258,13 @@
             </form>
         </footer>
     </div>
-    <button class="faq-widget-trigger" id="faq-trigger">         
+    <div class="faq-hide-toggle">
+      <label><input type="checkbox" id="hide-chat-button"> 챗봇 버튼 숨기기</label>
+    </div>
+    <button class="faq-widget-trigger" id="faq-trigger">
       <img class="chatbot-icon" src="https://hjun1052.github.io/DimiCheckFAQBot/src/chatbot.png" alt="Chatbot open button">
-      <span class="close-icon">&times;</span> 
-    </button>   
+      <span class="close-icon">&times;</span>
+    </button>
 `;
 
   // 3. 챗봇 로직을 정의합니다.
@@ -340,6 +364,18 @@
     const chatMessages = document.getElementById('chat-messages');
     const chatForm = document.getElementById('chat-form');
     const userInput = document.getElementById('user-input');
+    const hideToggle = document.getElementById('hide-chat-button');
+
+    if (localStorage.getItem('hideChat') === 'true') {
+      trigger.style.display = 'none';
+      hideToggle.checked = true;
+    }
+
+    hideToggle.addEventListener('change', () => {
+      const hide = hideToggle.checked;
+      trigger.style.display = hide ? 'none' : 'flex';
+      localStorage.setItem('hideChat', hide);
+    });
 
     trigger.addEventListener('click', () => {
       const isOpen = popup.classList.toggle('open');
