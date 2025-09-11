@@ -472,8 +472,17 @@
 
     hideToggle.addEventListener('change', () => {
       const hide = hideToggle.checked;
-      trigger.style.display = hide ? 'none' : 'flex';
-      localStorage.setItem('hideChat', hide);
+      if (hide) {
+          // 팝업 닫기
+          popup.classList.remove('open');
+          trigger.classList.remove('is-open');
+          // 버튼 숨기기
+          trigger.style.display = 'none';
+        } else {
+          trigger.style.display = 'flex';
+        }
+        localStorage.setItem('hideChat', hide);
+      });
     });
 
     trigger.addEventListener('click', () => {
