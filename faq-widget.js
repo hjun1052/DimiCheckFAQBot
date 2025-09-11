@@ -455,10 +455,10 @@
     const menu = document.getElementById('faq-menu');
     const hideToggle = document.getElementById('hide-chat-button');
 
-    if (localStorage.getItem('hideChat') === 'true') {
-      trigger.style.display = 'none';
-      hideToggle.checked = true;
-    }
+    const hidePref = localStorage.getItem('hideChat') === 'true';
+    hideToggle.checked = hidePref;
+    trigger.style.display = hidePref ? 'none' : 'flex';
+
 
     menuButton.addEventListener('click', (e) => {
       e.stopPropagation();
